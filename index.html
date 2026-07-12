@@ -1,49 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR Code Generator Pro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitol QR Pro v1.2</title>
 
-<link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="Professional QR Code Generator">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- QRCode Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+    <!-- html5-qrcode -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 </head>
+
 <body>
 
-<div class="container">
+<div id="toast"></div>
 
-<h1>QR Code Generator</h1>
+<header>
 
-<input
-type="text"
-id="text"
-placeholder="Enter Text, URL, Email, Phone">
+<div class="logo">
 
-<div class="btn-group">
+<i class="fa-solid fa-qrcode"></i>
 
-<button id="generate">Generate QR</button>
-
-<button id="downloadPNG">Save PNG</button>
-
-<button id="downloadJPG">Save JPG</button>
+<h2>Pitol QR Pro</h2>
 
 </div>
 
-<div id="qrcode"></div>
+<div class="header-buttons">
 
-<h2>History</h2>
+<button id="themeBtn">
 
-<div id="history"></div>
+<i class="fa-solid fa-moon"></i>
 
-<button id="clearHistory" class="clear-btn">
-Clear History
 </button>
 
 </div>
 
-<script src="script.js"></script>
+</header>
+
+<main>
+
+<section class="card">
+
+<h1>Create QR Code</h1>
+
+<input
+type="text"
+id="qrText"
+placeholder="Enter URL, Text, Email, Phone">
+
+<div class="grid">
+
+<div>
+
+<label>QR Size</label>
+
+<select id="qrSize">
+
+<option value="128">128 x 128</option>
+<option value="256" selected>256 x 256</option>
+<option value="512">512 x 512</option>
+<option value="1024">1024 x 1024</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Error Correction</label>
+
+<select id="errorLevel">
+
+<option>L</option>
+<option selected>M</option>
+<option>Q</option>
+<option>H</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Foreground</label>
+
+<input
+type="color"
+id="fgColor"
+value="#000000">
+
+</div>
+
+<div>
+
+<label>Background</label>
+
+<input
+type="color"
+id="bgColor"
+value="#ffffff">
+
+</div>
+
+</div>
+
+<div class="logo-upload">
+
+<label>Upload Logo</label>
+
+<input
+type="file"
+id="logoInput"
+accept="image/*">
+
+</div>
+
+<div class="actions">
+
+<button id="generateBtn">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+Generate
+
+</button>
+
+<button id="clearBtn">
+
+Clear
+
+</button>
+
+</div>
+
+<div class="preview">
+
+<canvas id="qrCanvas"></canvas>
+
+</div>
+
+<div class="download-buttons">
+
+<button id="pngBtn">PNG</button>
+
+<button id="jpgBtn">JPG</button>
+
+<button id="svgBtn">SVG</button>
+
+<button id="pdfBtn">PDF</button>
+
+<button id="copyBtn">Copy</button>
+
+</div>
+
+</section>
+
+<section class="card">
+
+<h2>
+
+History
+
+</h2>
+
+<input
+type="search"
+id="historySearch"
+placeholder="Search History">
+
+<div id="historyList"></div>
+
+<button id="clearHistory">
+
+Clear History
+
+</button>
+
+</section>
+
+<section class="card">
+
+<h2>
+
+Batch Generator
+
+</h2>
+
+<textarea
+id="batchInput"
+rows="8"
+placeholder="One QR per line"></textarea>
+
+<button id="batchGenerate">
+
+Generate Batch
+
+</button>
+
+</section>
+
+<section class="card">
+
+<h2>
+
+QR Scanner
+
+</h2>
+
+<div id="reader"></div>
+
+<button id="startScanner">
+
+Start Scanner
+
+</button>
+
+<button id="stopScanner">
+
+Stop Scanner
+
+</button>
+
+</section>
+
+</main>
+
+<footer>
+
+<p>
+
+© 2026 BrownFoxBD • Pitol QR Pro v1.2
+
+</p>
+
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/generator.js"></script>
+<script src="js/history.js"></script>
+<script src="js/scanner.js"></script>
+<script src="js/batch.js"></script>
+<script src="js/download.js"></script>
+<script src="js/app.js"></script>
 
 </body>
+
 </html>
